@@ -1,5 +1,20 @@
 import { useState } from 'react'
-
+// a proper place to define a component
+const Statistics = (props) => {
+  const {good,neutral,bad}=props
+  return(
+    <div>
+      <h1>statistics</h1>
+      <p>good {good}</p>
+      <p>neutral {neutral}</p>
+      <p>bad {bad}</p>
+      <p>all {good-bad}</p>
+      <p>average {(good-bad)/(good+neutral+bad)}</p>
+      <p>positive {good*100/(good+neutral+bad)} %</p>
+    </div>
+  )
+  // ...
+}
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0)
@@ -18,16 +33,8 @@ const App = () => {
         <button onClick={()=>{setBad(bad+1)}}>bad</button>
         </div>
       </div>
-      <div>
-        <h1>statistics</h1>
-        <p>good {good}</p>
-        <p>neutral {neutral}</p>
-        <p>bad {bad}</p>
-        <p>all {good-bad}</p>
-        <p>average {(good-bad)/(good+neutral+bad)}</p>
-        <p>positive {good*100/(good+neutral+bad)} %</p>
-
-      </div>
+      <Statistics good={good} neutral={neutral} bad={bad} />
+      
     </div>
   )
 }
