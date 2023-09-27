@@ -21,11 +21,14 @@ const Header = (props) => {
     </div>
   )
 }
-const Part=(props)=>{
+const Part=({parts})=>{
+    
   return(
+    
     <div>
+        {parts.map(part=><p>{part.name} {part.exercises}</p>)}
 
-    <p>{props.part.name} {props.part.exercises}</p>
+    
     </div>
   )
 
@@ -34,9 +37,8 @@ const Content=(props)=>{
   
   return(
     <div>
-    <Part  part={props.parts[0]} />
-    <Part  part={props.parts[1]}/>
-    <Part  part={props.parts[2]}/>
+    <Part  parts={props.parts} />
+    
     </div>
   )
   
