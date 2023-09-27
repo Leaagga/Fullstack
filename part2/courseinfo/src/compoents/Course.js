@@ -13,8 +13,6 @@ const Course=({course})=>{
 
 
 const Header = (props) => {
-
-
   return (
     <div>
       <h1>{props.course}</h1>
@@ -22,11 +20,10 @@ const Header = (props) => {
   )
 }
 const Part=({parts})=>{
-    
   return(
     
     <div>
-        {parts.map(part=><p>{part.name} {part.exercises}</p>)}
+        {parts.map(part=><p key={part.id}>{part.name} {part.exercises}</p>)}
 
     
     </div>
@@ -44,11 +41,11 @@ const Content=(props)=>{
   
 
 }
-const Total=(props)=>{
+const Total=({parts})=>{
   return(
     <div>
       <p>
-        Number of exercises {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises}
+        Totals of {parts.reduce((acc,p)=>acc+p.exercises,0)} exercises 
       </p>
     </div>
   )
