@@ -1,6 +1,31 @@
 import axios from 'axios'
 import {useState,useEffect} from 'react'
+const Weather=({country,})=>{
+  const api_key = process.env.REACT_APP_API_KEY
+  const [cityweather,setCityWeather]=useState()
+  const weatherurl=`https://api.openweathermap.org/data/2.5/weather?q=${country.capital[0]}&appid=${api_key}&units=metric`
+  console.log(weatherurl)
+  useEffect(()=>{
+
+    axios
+      .get(weatherurl)
+      .then(response=>{
+        setCityWeather(response.data)
+        console.log(response.data)}
+      )},[])
+  if (cityweather){
+  return(
+    <div>
+    <h2>Weather in {country.capital[0]} </h2>  
+    <p>temperture {cityweather.main.temp} Celcius</p> 
+      <img src={`https://openweathermap.org/img/wn/${cityweather.weather[0].icon}@2x.png`} alt={cityweather.weather[0].description}></img>
+      <p>wind {cityweather.wind.speed}m/s</p>
+    </div>
+  )    
+  }
+}
 const Country=({country})=>{
+
   return(
     <div>
       <h2>{country.name.common}</h2>
@@ -11,8 +36,10 @@ const Country=({country})=>{
         {Object.values(country.languages).map(l=><li key={l}>{l}</li>)}
       </ul>
       <img src={country.flags.png} alt={country.flags.alt}/>
+      <Weather country={country}/>
+
     </div>
-  )
+  ) 
 }
 const Filterresult=({filteredcount})=>{
   const resu='Too many matches,specify another filter'
@@ -26,7 +53,11 @@ const Filterresult=({filteredcount})=>{
       )
     }else{
       return(
-        filteredcount.map(c=><p>{c.name.common}</p>)
+        filteredcount.map(c=><div >
+          <form>
+          <label>{c.name.common}</label><button type='button' id={c.name.common}>show</button>
+          </form>
+          </div>)
       )
     }
     }
