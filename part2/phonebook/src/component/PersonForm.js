@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useState } from 'react'
-const PersonForm=({persons,setPersons,personsService})=>{
+const PersonForm=({persons,setPersons,personsService,succeedMessage,setSucceedMessage})=>{
     const [newName, setNewName] = useState('')
     const [newNumber,setNewNumber]=useState('')
  
@@ -19,7 +19,10 @@ const PersonForm=({persons,setPersons,personsService})=>{
                     .update(found.id,newPerson)
                     .then(response=>{
                         setPersons(persons.map(s=>s.id==found.id?response:s))
-                    })
+                        setSucceedMessage(`Changed ${newPerson.name}'s number`)
+                        setTimeout(()=>{
+                                setSucceedMessage(null)
+                            },5000)})
             }}
         else{
         personsService
@@ -27,6 +30,10 @@ const PersonForm=({persons,setPersons,personsService})=>{
             .then(response=>{
                 console.log(response)
                 setPersons(persons.concat(response))
+                setSucceedMessage(`Added ${newPerson.name}`)
+                setTimeout(()=>{
+                                setSucceedMessage(null)
+                            },5000)
             })
 // setPersons(persons.concat(newPerson))
             }
