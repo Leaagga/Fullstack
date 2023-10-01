@@ -41,8 +41,21 @@ const Country=({country})=>{
     </div>
   ) 
 }
+const Briefcountry=({c})=>{
+  const [clicked,setClicked]=useState(false)
+  return(
+      <div >
+          <form onClick={()=>setClicked(true)}>
+          <label>{c.name.common}</label><button type='button' id={c.name.common}>show</button>
+          {clicked?<Country country={c}/>:<p></p>}
+          </form>
+      </div>)
+
+}
 const Filterresult=({filteredcount})=>{
   const resu='Too many matches,specify another filter'
+
+  
   if (filteredcount){
     if(filteredcount.length>10){
       return(<p>{resu}</p>)  
@@ -53,11 +66,7 @@ const Filterresult=({filteredcount})=>{
       )
     }else{
       return(
-        filteredcount.map(c=><div >
-          <form>
-          <label>{c.name.common}</label><button type='button' id={c.name.common}>show</button>
-          </form>
-          </div>)
+        filteredcount.map(c=><Briefcountry c={c}/>)
       )
     }
     }
