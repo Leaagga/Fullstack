@@ -1,5 +1,5 @@
 
-const Message=({succeedMessage,setSucceedMessage})=>{
+const Message=({succeedMessage,setSucceedMessage,errorMsg,setErrorMsg})=>{
     if(succeedMessage){
             return(
         <div className="succedmsg">
@@ -7,6 +7,14 @@ const Message=({succeedMessage,setSucceedMessage})=>{
 
         </div>
     )
+    }
+    if(errorMsg){
+        return(
+        <div className="errormsg">
+            {errorMsg}
+
+        </div>            
+        )
     }
 
 

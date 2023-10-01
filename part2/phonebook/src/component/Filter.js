@@ -1,4 +1,4 @@
-const Filter=({persons,newFilter,setNewFilter})=>{
+const Filter=({newFilter,setNewFilter})=>{
 
     const handlefilterchange=(event)=>{
       setNewFilter(event.target.value)

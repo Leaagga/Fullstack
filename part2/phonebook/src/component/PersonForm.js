@@ -9,7 +9,7 @@ const PersonForm=({persons,setPersons,personsService,succeedMessage,setSucceedMe
         const newPerson={
             name:newName,
             number:newNumber,
-            id:persons.length+1
+            
             }
         if (persons.findIndex(e=>e.name==newName)!==-1){
             if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)){
@@ -35,7 +35,6 @@ const PersonForm=({persons,setPersons,personsService,succeedMessage,setSucceedMe
                                 setSucceedMessage(null)
                             },5000)
             })
-// setPersons(persons.concat(newPerson))
             }
 
         setNewName('')
