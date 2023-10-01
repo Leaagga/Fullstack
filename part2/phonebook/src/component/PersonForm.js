@@ -1,5 +1,6 @@
+import axios from 'axios'
 import { useState } from 'react'
-const PersonForm=({persons,setPersons})=>{
+const PersonForm=({persons,setPersons,personsService})=>{
     const [newName, setNewName] = useState('')
     const [newNumber,setNewNumber]=useState('')
  
@@ -13,12 +14,20 @@ const PersonForm=({persons,setPersons})=>{
         if (persons.findIndex(e=>e.name==newName)!==-1){
             alert(newName+' is already added to phonebook')}
         else{
-            setPersons(persons.concat(newPerson))
+
+        personsService
+            .create(newPerson)
+            .then(response=>{
+                console.log(response)
+                setPersons(persons.concat(response))
+            })
+// setPersons(persons.concat(newPerson))
             }
 
         setNewName('')
         setNewNumber('')
-        } 
+        }
+
 
     return(
         <form onSubmit={addperson}>
