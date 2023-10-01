@@ -1,4 +1,4 @@
-const Persons=({persons,newFilter,personsService})=>{
+const Persons=({persons,newFilter,setPersons,personsService})=>{
     const shownPersons=newFilter
     ?persons.filter(p=>p.name.toLowerCase().includes(newFilter.toLowerCase()))
     :persons
@@ -9,7 +9,7 @@ const Persons=({persons,newFilter,personsService})=>{
                 ()=>{if (window.confirm(`Delete ${p.name}?`)){
                     personsService
                         .httpdelete(p)
-                        .then(response=>console.log(response))}
+                        .then(()=>setPersons(persons.filter(s=>s.id!==p.id)))}
         }}>
         <label key={p.id}>{p.name} {p.number}</label><button type='button'>delete</button></form>
         )}

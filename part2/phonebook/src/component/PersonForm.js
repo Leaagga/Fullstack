@@ -12,9 +12,16 @@ const PersonForm=({persons,setPersons,personsService})=>{
             id:persons.length+1
             }
         if (persons.findIndex(e=>e.name==newName)!==-1){
-            alert(newName+' is already added to phonebook')}
+            if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)){
+                const found=persons.find(p=>p.name==newName)
+                newPerson.id=found.id
+                personsService
+                    .update(found.id,newPerson)
+                    .then(response=>{
+                        setPersons(persons.map(s=>s.id==found.id?response:s))
+                    })
+            }}
         else{
-
         personsService
             .create(newPerson)
             .then(response=>{
