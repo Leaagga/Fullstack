@@ -1,6 +1,5 @@
-import axios from 'axios'
 import { useState } from 'react'
-const PersonForm=({persons,setPersons,personsService,succeedMessage,setSucceedMessage})=>{
+const PersonForm=({persons,setPersons,personsService,setSucceedMessage})=>{
     const [newName, setNewName] = useState('')
     const [newNumber,setNewNumber]=useState('')
  
