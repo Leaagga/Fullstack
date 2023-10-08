@@ -5,7 +5,8 @@ const Persons=({persons,newFilter,setPersons,personsService,setErrorMsg,setSucce
 
     return(
         <div>
-            {shownPersons.map(p=><form onClick={
+            {shownPersons.map(p=><form >
+        <label key={p.id}>{p.name} {p.number}</label><button type='button' onClick={
                 ()=>{if (window.confirm(`Delete ${p.name}?`)){
                     personsService
                         .httpdelete(p)
@@ -19,8 +20,7 @@ const Persons=({persons,newFilter,setPersons,personsService,setErrorMsg,setSucce
                             
                         })
                         }
-        }}>
-        <label key={p.id}>{p.name} {p.number}</label><button type='button'>delete</button></form>
+        }}>delete</button></form>
         )}
         
         </div>
