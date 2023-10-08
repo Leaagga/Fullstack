@@ -1,5 +1,5 @@
 import { useState } from 'react'
-const PersonForm=({persons,setPersons,personsService,setSucceedMessage})=>{
+const PersonForm=({persons,setPersons,personsService,setSucceedMessage,setErrorMsg})=>{
     const [newName, setNewName] = useState('')
     const [newNumber,setNewNumber]=useState('')
  
@@ -22,6 +22,12 @@ const PersonForm=({persons,setPersons,personsService,setSucceedMessage})=>{
                         setTimeout(()=>{
                                 setSucceedMessage(null)
                             },5000)})
+                    .catch(error=>{
+                        setErrorMsg(error.response.data.error)
+                        setTimeout(()=>{
+                                setErrorMsg(null)
+                            },5000)
+                    })
             }}
         else{
         personsService
@@ -34,6 +40,11 @@ const PersonForm=({persons,setPersons,personsService,setSucceedMessage})=>{
                                 setSucceedMessage(null)
                             },5000)
             })
+            .catch(error=>{
+                        setErrorMsg(error.response.data.error)
+                        setTimeout(()=>{
+                                setErrorMsg(null)
+                            },5000)})
             }
 
         setNewName('')

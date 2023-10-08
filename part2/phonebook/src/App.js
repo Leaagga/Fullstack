@@ -14,7 +14,8 @@ const App = () => {
         .getAll()
         .then(response=>{
           setPersons(response)
-        })
+                })
+
     },[])
   return (
     <div>
@@ -23,7 +24,7 @@ const App = () => {
       <Filter  newFilter={newFilter} setNewFilter={setNewFilter} />
 
       <h2>Add a new</h2>
-      <PersonForm persons={persons} setPersons={setPersons} personsService={personsService} setSucceedMessage={setSucceedMessage} />
+      <PersonForm persons={persons} setPersons={setPersons} personsService={personsService} setErrorMsg={setErrorMsg} setSucceedMessage={setSucceedMessage} />
 
       <h2>Numbers</h2>
       
